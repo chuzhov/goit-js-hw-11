@@ -6,7 +6,7 @@ import axios from "axios";
 import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-const axios = require("axios").default;
+//const axios = require("axios").default;
 const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
 
@@ -82,7 +82,7 @@ function getGalleryItems({hits}) {
             </a>
                 <div class="info">
                     <p class="info-item">
-                    <img src="/img/ico-views-bw.png" width="20px" height="20px" alt=""/>${item?.likes ?? 0}
+                    <img src="./img/ico-views-bw.png" width="20px" height="20px" alt=""/>${item?.likes ?? 0}
                     </p>
                     <p class="info-item">
                     <b>Views</b>${item?.views ?? 0}
