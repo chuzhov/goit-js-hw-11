@@ -32,7 +32,7 @@ refs.loadMoreBtn.addEventListener("click", loadMoreImages);
 async function submitQueryHandler(event) {
     event.preventDefault();
 
-    userQuery = event.target.elements[0].value.trim().replace(" ","+");
+    const userQuery = event.target.elements[0].value.trim().replace(" ","+");
 
     if (userQuery === "") {return false}  // required не повінен пропустити пустий запрос але...
     if (userQuery === currentUserQuery) {return false}
