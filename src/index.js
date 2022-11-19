@@ -6,11 +6,13 @@ import axios from "axios";
 import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import "./img/ico-views-bw.png"
+
 //const axios = require("axios").default;
 const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
 
-refs = {
+const refs = {
     submitQuery : document.querySelector("#search-form"),
     imgGallery : document.querySelector("div.gallery"),
     loadMoreBtn : document.querySelector("button.load-more"),
