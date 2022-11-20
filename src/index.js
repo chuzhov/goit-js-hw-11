@@ -6,12 +6,6 @@ import axios from "axios";
 import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-import "./img/ico-views-bw.png"
-
-//const axios = require("axios").default;
-const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
-
-
 const refs = {
     submitQuery : document.querySelector("#search-form"),
     imgGallery : document.querySelector("div.gallery"),
@@ -28,6 +22,8 @@ let currenPageNum = 1
 refs.loadMoreBtn.classList.add("is-hidden");
 refs.submitQuery.addEventListener("submit", submitQueryHandler);
 refs.loadMoreBtn.addEventListener("click", loadMoreImages);
+
+const lightbox = new SimpleLightbox('.gallery a', { captions: true });
 
 async function submitQueryHandler(event) {
     event.preventDefault();
@@ -69,7 +65,9 @@ async function submitQueryHandler(event) {
         toastr.success(`We found ${imagesQuantity} images. ${pagesQuantity} pages are allowed.`)
                 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
+        
         lightbox.on('show.simplelightbox');
+
     });
     
 }
@@ -84,16 +82,19 @@ function getGalleryItems({hits}) {
             </a>
                 <div class="info">
                     <p class="info-item">
-                    <img src="./img/ico-views-bw.png" width="20px" height="20px" alt=""/>${item?.likes ?? 0}
+                    <img src="./src/img/ico-views-bw.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
                     </p>
                     <p class="info-item">
-                    <b>Views</b>${item?.views ?? 0}
+                    <b>Views
+                    </b>${item?.views ?? 0}
                     </p>
                     <p class="info-item">
-                    <b>Comments</b>${item?.comments ?? 0}
+                    <b>Comments
+                    </b>${item?.comments ?? 0}
                     </p>
                     <p class="info-item">
-                    <b>Downloads</b>${item?.domnloads ?? 0}
+                    <b>Downloads
+                    </b>${item?.domnloads ?? 0}
                     </p>
                 </div>
             </div>`
@@ -147,4 +148,6 @@ function loadMoreImages() {
     axiosFetchPictures(currentUserQuery).then(results => {
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
     });
+    console.log(lightbox);
+    lightbox.refresh();
 }

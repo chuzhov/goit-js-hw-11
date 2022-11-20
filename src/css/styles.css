@@ -5,7 +5,7 @@
 }
 
 img {
-  display: inline-block;
+  display: block;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
 }
 
 .header {
-  position: fixed;
+  /* position: fixed;
   top: 0;
 
   display: block;
@@ -31,7 +31,19 @@ body {
   width: 100%;
   min-width: 200px;
 
-  margin: 2rem auto;
+  margin: 2rem auto; */
+
+  position: fixed;
+  top: 0;
+  display: block;
+  height: 4rem;
+  width: 100%;
+  
+  margin: 0 auto 1rem;
+  padding-top: 1rem;
+
+  background: linear-gradient(to bottom, rgb(40, 130, 150), rgba(13, 102, 125, 0.6)); 
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 }
 .search-form {
@@ -61,7 +73,6 @@ button[type=submit]{
 
   color: white;
   background: #2193b0;  
-  background: -webkit-linear-gradient(to right, rgba(109, 213, 237, 0.5), rgba(33, 147, 176, 0.5));  
   background: linear-gradient(to right, #3ea2b8, #0d657b); 
 
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -92,6 +103,9 @@ button[type=submit]{
 
 }
 .info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .load-more {
