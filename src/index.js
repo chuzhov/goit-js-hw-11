@@ -153,8 +153,7 @@ function loadMoreImagesBtn() {
 }
 
 function loadMoreImagesInfinite(entries, observer) {
-    console.dir(entries);
-    console.dir(observer);
+    
     if (!entries[0].isIntersecting) return;
 
     infinite.unobserve(entries[0].target);

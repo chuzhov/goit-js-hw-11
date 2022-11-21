@@ -83,7 +83,17 @@ button[type=submit]{
   background: linear-gradient(to right, #3ea2b8, #0d657b); 
 
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
 
+.select-scroll-txt {
+  margin-right: 0.7rem;
+  font-size: 14px;
+  color: white;
+}
+
+.select-scroll-gear:focus {
+  box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.4);
+  outline: none;
 }
 
 .gallery {
