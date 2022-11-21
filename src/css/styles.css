@@ -23,15 +23,8 @@ body {
 }
 
 .header {
-  /* position: fixed;
-  top: 0;
-
-  display: block;
-  height: auto;
-  width: 100%;
-  min-width: 200px;
-
-  margin: 2rem auto; */
+  display: flex;
+  align-items: flex-start;
 
   position: fixed;
   top: 0;
