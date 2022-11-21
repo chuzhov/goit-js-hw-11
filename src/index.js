@@ -5,7 +5,7 @@ import axios from 'axios';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-let lightbox = new SimpleLightbox('.gallery a', { captions: true, captionsData: "alt", captionDelay: 250 });
+let lightbox = new SimpleLightbox('.gallery a', { captions: true });
 
 const refs = {
     submitQuery : document.querySelector("#search-form"),
@@ -17,8 +17,6 @@ const addNewPicturesGear = {
     types: ["loadMoreBtn", "endlessScroll"],
     current: "loadMoreBtn",
 }
-
-console.log(addNewPicturesGear.current);
 
 let currentUserQuery = "";
 
