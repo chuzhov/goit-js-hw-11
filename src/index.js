@@ -15,7 +15,7 @@ const refs = {
 
 const addNewPicturesGear = {
     types: ["loadMoreBtn", "infiniteScroll"],
-    current: "loadMoreBtn",
+    current: "infiniteScroll",
 }
 
 const observerOptions = {
@@ -31,14 +31,13 @@ let imagesQuantity = 0;
 let pagesQuantity = 0;
 let currentPageNum = 1
 
-refs.loadMoreBtn.classList.add("is-hidden");
 refs.submitQuery.addEventListener("submit", submitQueryHandler);
 
 if (addNewPicturesGear.current = "loadMoreBtn") {
     refs.loadMoreBtn.addEventListener("click", loadMoreImagesBtn)
 }
 if (addNewPicturesGear.current = "infiniteScroll") {
-    const infinite = new IntersectionObserver(loadMoreImagesInfinite, observerOptions);
+    var infinite = new IntersectionObserver( loadMoreImagesInfinite, observerOptions );
 }
 
 async function submitQueryHandler(event) {
@@ -69,10 +68,17 @@ async function submitQueryHandler(event) {
 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
 
-        if (addNewPicturesGear.current = "loadMoreBtn") {
+        if ( addNewPicturesGear.current === "loadMoreBtn" ) {
             if ( hasMoreImages ) {
                 refs.loadMoreBtn.classList.remove("is-hidden");
             } else refs.loadMoreBtn.classList.add("is-hidden");
+        }
+
+        if ( addNewPicturesGear.current === "infiniteScroll" ) {
+            if ( hasMoreImages ) {
+                let target = document.querySelector("div.photo-card:last-child");
+                infinite.observe(target);
+            }
         }
         
     }).
@@ -135,7 +141,6 @@ function loadMoreImagesBtn() {
         refs.loadMoreBtn.classList.add("is-hidden");
         return;
     }
-    
 
     axiosFetchPictures(currentUserQuery).then(results => {
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
@@ -144,9 +149,33 @@ function loadMoreImagesBtn() {
     if ( hasMoreImages() ) {
         refs.loadMoreBtn.classList.remove("is-hidden");
     } else refs.loadMoreBtn.classList.add("is-hidden");
-
-    
+ 
 }
+
+function loadMoreImagesInfinite(entries, observer) {
+    console.dir(entries);
+    console.dir(observer);
+    if (!entries[0].isIntersecting) return;
+
+    infinite.unobserve(entries[0].target);
+    if (currentPageNum < pagesQuantity) currentPageNum+=1
+    else return;
+    
+
+    axiosFetchPictures(currentUserQuery).then(results => {
+        renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
+    });
+
+    if ( hasMoreImages ) 
+    {
+        target = document.querySelector("div.photo-card:last-child");
+        infinite.observe(target);
+    }
+
+
+}
+
+
 
 async function axiosFetchPictures(q) {
 
@@ -172,8 +201,4 @@ async function axiosFetchPictures(q) {
         } catch (err) {
             console.log(err);
         } 
-    }
-
-    function loadMoreImagesInfinite() {
-
     }
