@@ -57,7 +57,7 @@ body {
 }
 
 [name=searchQuery]:focus {
-  box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 1px 8px rgba(0, 0, 0, 0.4);
   outline: none;
 }
 

@@ -27,7 +27,10 @@ let currentPageNum = 1
 
 refs.loadMoreBtn.classList.add("is-hidden");
 refs.submitQuery.addEventListener("submit", submitQueryHandler);
-refs.loadMoreBtn.addEventListener("click", loadMoreImages);
+
+if (addNewPicturesGear.current = "loadMoreBtn")
+    refs.loadMoreBtn.addEventListener("click", loadMoreImages)
+else 
 
 async function submitQueryHandler(event) {
     event.preventDefault();
@@ -92,18 +95,18 @@ function getGalleryItems({hits}) {
             </a>
                 <div class="info">
                     <p class="info-item">
-                    <img src="/ico-likes-bw.2b3c6fe8.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
+                    <img src="./ico-likes-bw.2b3c6fe8.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="/ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
+                    <img src="./ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
                     ${item?.views ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="/ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
+                    <img src="./ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
                     ${item?.comments ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="/ico-downloads-bw.0a013ef5.png" width="20" height="20" alt=""/>
+                    <img src="./ico-downloads-bw.0a013ef5.png" width="20" height="20" alt=""/>
                     ${item?.domnloads ?? 0}
                     </p>
                 </div>
