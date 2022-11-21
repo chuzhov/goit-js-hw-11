@@ -14,9 +14,15 @@ const refs = {
 }
 
 const addNewPicturesGear = {
-    types: ["loadMoreBtn", "endlessScroll"],
+    types: ["loadMoreBtn", "infiniteScroll"],
     current: "loadMoreBtn",
 }
+
+const observerOptions = {
+    root: null,
+    rootMargin: '100px',
+    threshold: 1.0,
+  };
 
 let currentUserQuery = "";
 
@@ -28,9 +34,12 @@ let currentPageNum = 1
 refs.loadMoreBtn.classList.add("is-hidden");
 refs.submitQuery.addEventListener("submit", submitQueryHandler);
 
-if (addNewPicturesGear.current = "loadMoreBtn")
-    refs.loadMoreBtn.addEventListener("click", loadMoreImages)
-else 
+if (addNewPicturesGear.current = "loadMoreBtn") {
+    refs.loadMoreBtn.addEventListener("click", loadMoreImagesBtn)
+}
+if (addNewPicturesGear.current = "infiniteScroll") {
+    const infinite = new IntersectionObserver(loadMoreImagesInfinite, observerOptions);
+}
 
 async function submitQueryHandler(event) {
     event.preventDefault();
@@ -45,26 +54,7 @@ async function submitQueryHandler(event) {
 
     currentUserQuery = userQuery;
     currentPageNum = 1;
-    // try {
-    //     const data = await axiosFetchPictures(currentUserQuery);
-    //     console.log("data ", data);
-    // }
-
-
-    // try {
-    //     const {results} = await axiosFetchPictures(currentUserQuery);
-    //     console.log(results);
-    //     if (results.totalHits === 0) {
-    //         toastr.error("Your fantasy has no limits! </br> Sorry, there are no images matching your search query");
-    //         return;
-    //     }
-        
-    //     renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
-
-    // } catch (error) {
-    //     toastr.error("Run-time error: ", error);
-    // } 
-
+   
     axiosFetchPictures(currentUserQuery)
     .then(results => {
         
@@ -79,6 +69,11 @@ async function submitQueryHandler(event) {
         toastr.success(`Great choice! We found ${imagesQuantity} images.`);
 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
+
+        if ( hasMoreImages ) {
+            refs.loadMoreBtn.classList.remove("is-hidden");
+        } else refs.loadMoreBtn.classList.add("is-hidden");
+    
         
     }).
     catch((error)=> toastr.error(`Something went wrong: `, error));
@@ -121,21 +116,35 @@ function getGalleryItems({hits}) {
 function renderGalleryItems(element, HTMLstring) {
     
     element.insertAdjacentHTML("beforeend", HTMLstring);
-    lightbox.refresh();
+    lightbox.refresh();  
     
-    if (currentPageNum * PER_PAGE < imagesQuantity) {
-        refs.loadMoreBtn.classList.remove("is-hidden");
-    } else refs.loadMoreBtn.classList.add("is-hidden");
 }
 
-function loadMoreImages() {
-   
-    if (currentPageNum <= pagesQuantity) currentPageNum+=1
-    else return;
+function hasMoreImages() {
+    if (currentPageNum * PER_PAGE < imagesQuantity)
+    return true
+    else return false
+}
+
+function loadMoreImagesBtn() {
+   debugger
+    if (hasMoreImages()) {
+        currentPageNum+=1      
+    }
+    else {
+        refs.loadMoreBtn.classList.add("is-hidden");
+        return;
+    }
+    
 
     axiosFetchPictures(currentUserQuery).then(results => {
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
     });
+    debugger
+    if ( hasMoreImages() ) {
+        refs.loadMoreBtn.classList.remove("is-hidden");
+    } else refs.loadMoreBtn.classList.add("is-hidden");
+
     
 }
 
@@ -163,4 +172,8 @@ async function axiosFetchPictures(q) {
         } catch (err) {
             console.log(err);
         } 
+    }
+
+    function loadMoreImagesInfinite() {
+
     }
