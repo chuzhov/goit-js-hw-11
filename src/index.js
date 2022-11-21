@@ -102,18 +102,18 @@ function getGalleryItems({hits}) {
             </a>
                 <div class="info">
                     <p class="info-item">
-                    <img src="./ico-likes-bw.2b3c6fe8.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
+                    <img src="./ico-likes-bw.fd4e297b.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="./ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
+                    <img src="./ico-views-bw.0707ab6b.png" width="20" height="20" alt=""/>
                     ${item?.views ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="./ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
+                    <img src=./"ico-comments-bw.d07546d3.png"" width="20" height="20" alt=""/>
                     ${item?.comments ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="./ico-downloads-bw.0a013ef5.png" width="20" height="20" alt=""/>
+                    <img src="./ico-downloads-bw.73685297.png" width="20" height="20" alt=""/>
                     ${item?.domnloads ?? 0}
                     </p>
                 </div>
