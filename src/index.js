@@ -15,7 +15,7 @@ const refs = {
 
 const addNewPicturesGear = {
     types: ["loadMoreBtn", "infiniteScroll"],
-    current: "infiniteScroll",
+    current: "loadMoreBtn",
 }
 
 const observerOptions = {
@@ -23,6 +23,7 @@ const observerOptions = {
     rootMargin: '100px',
     threshold: 1.0,
   };
+let infinite ;
 
 let currentUserQuery = "";
 
@@ -33,12 +34,6 @@ let currentPageNum = 1
 
 refs.submitQuery.addEventListener("submit", submitQueryHandler);
 
-if (addNewPicturesGear.current = "loadMoreBtn") {
-    refs.loadMoreBtn.addEventListener("click", loadMoreImagesBtn)
-}
-if (addNewPicturesGear.current = "infiniteScroll") {
-    var infinite = new IntersectionObserver( loadMoreImagesInfinite, observerOptions );
-}
 
 async function submitQueryHandler(event) {
     event.preventDefault();
@@ -52,6 +47,18 @@ async function submitQueryHandler(event) {
 
     currentUserQuery = userQuery;
     currentPageNum = 1;
+
+    addNewPicturesGear.current = event.target.elements[2].value;
+    
+
+    if (addNewPicturesGear.current === "loadMoreBtn") {
+        refs.loadMoreBtn.addEventListener("click", loadMoreImagesBtn)
+    }
+    if (addNewPicturesGear.current === "infiniteScroll") {
+        
+        infinite = new IntersectionObserver( loadMoreImagesInfinite, observerOptions );
+    }
+    
    
     axiosFetchPictures(currentUserQuery)
     .then(results => {
@@ -73,10 +80,9 @@ async function submitQueryHandler(event) {
                 refs.loadMoreBtn.classList.remove("is-hidden");
             } else refs.loadMoreBtn.classList.add("is-hidden");
         }
-
         if ( addNewPicturesGear.current === "infiniteScroll" ) {
             if ( hasMoreImages ) {
-                let target = document.querySelector("div.photo-card:last-child");
+                var target = document.querySelector("div.photo-card:last-child");
                 infinite.observe(target);
             }
         }
