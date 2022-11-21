@@ -109,7 +109,7 @@ function getGalleryItems({hits}) {
                     ${item?.views ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src=./"ico-comments-bw.d07546d3.png""" width="20" height="20" alt=""/>
+                    <img src=./src="/ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
                     ${item?.comments ?? 0}
                     </p>
                     <p class="info-item">
