@@ -50,7 +50,6 @@ async function submitQueryHandler(event) {
     if (userQuery === currentUserQuery) {return false}
     
     refs.imgGallery.innerHTML=""; 
-    refs.loadMoreBtn.classList.add("is-hidden");
 
     currentUserQuery = userQuery;
     currentPageNum = 1;
@@ -70,10 +69,11 @@ async function submitQueryHandler(event) {
 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
 
-        if ( hasMoreImages ) {
-            refs.loadMoreBtn.classList.remove("is-hidden");
-        } else refs.loadMoreBtn.classList.add("is-hidden");
-    
+        if (addNewPicturesGear.current = "loadMoreBtn") {
+            if ( hasMoreImages ) {
+                refs.loadMoreBtn.classList.remove("is-hidden");
+            } else refs.loadMoreBtn.classList.add("is-hidden");
+        }
         
     }).
     catch((error)=> toastr.error(`Something went wrong: `, error));
@@ -127,7 +127,7 @@ function hasMoreImages() {
 }
 
 function loadMoreImagesBtn() {
-   debugger
+   
     if (hasMoreImages()) {
         currentPageNum+=1      
     }
@@ -140,7 +140,7 @@ function loadMoreImagesBtn() {
     axiosFetchPictures(currentUserQuery).then(results => {
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
     });
-    debugger
+
     if ( hasMoreImages() ) {
         refs.loadMoreBtn.classList.remove("is-hidden");
     } else refs.loadMoreBtn.classList.add("is-hidden");
