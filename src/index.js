@@ -104,18 +104,19 @@ function getGalleryItems({hits}) {
             </a>
                 <div class="info">
                     <p class="info-item">
-                    <img src="./ico-likes-bw.2b3c6fe8.png" width="20" height="20" alt=""/>${item?.likes ?? 0}
+                    <i class="fa fa-thumbs-o-up" style="font-size:20px"></i>
+                    ${item?.likes ?? 0}
                     </p> 
                     <p class="info-item">
-                    <img src="./ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
+                    <i class="fa fa-eye" style="font-size:20px"></i>
                     ${item?.views ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="./ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
+                    <i class="fa fa-comments-o" style="font-size:20px"></i>
                     ${item?.comments ?? 0}
                     </p>
                     <p class="info-item">
-                    <img src="./ico-comments-bw.eb998e7b.png" width="20" height="20" alt=""/>
+                    <i class="fa fa-download" style="font-size:20px"></i>
                     ${item?.domnloads ?? 0}
                     </p>
                 </div>
@@ -123,6 +124,11 @@ function getGalleryItems({hits}) {
         ).join("");
 
         return HTMLstring;
+
+        //<img src="./ico-likes-bw.2b3c6fe8.png" width="20" height="20" alt=""/>
+        //<img src="./ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
+
+       // <img src="./ico-views-bw.e96f01c1.png" width="20" height="20" alt=""/>
     }
 
 }
