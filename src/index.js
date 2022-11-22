@@ -76,7 +76,7 @@ async function submitQueryHandler(event) {
         toastr.success(`Great choice! We found ${imagesQuantity} images.`);
 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
-debugger
+
         if ( addNewPicturesGear.current === "loadMoreBtn" ) {
             if ( hasMoreImages() ) {
                 refs.loadMoreBtn.classList.remove("is-hidden");
@@ -172,14 +172,12 @@ async function loadMoreImagesInfinite(entries, observer) {
     
     if (!entries[0].isIntersecting) return;
 
-    console.log(entries);
-
     observer.unobserve(entries[0].target);
     if (currentPageNum < pagesQuantity) currentPageNum+=1
     else return;
     
 try {
-    results = await axiosFetchPictures(currentUserQuery) 
+    const results = await axiosFetchPictures(currentUserQuery) 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
 
     if ( hasMoreImages() ) 
