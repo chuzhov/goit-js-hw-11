@@ -76,14 +76,14 @@ async function submitQueryHandler(event) {
         toastr.success(`Great choice! We found ${imagesQuantity} images.`);
 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
-
+debugger
         if ( addNewPicturesGear.current === "loadMoreBtn" ) {
-            if ( hasMoreImages ) {
+            if ( hasMoreImages() ) {
                 refs.loadMoreBtn.classList.remove("is-hidden");
             } else refs.loadMoreBtn.classList.add("is-hidden");
         }
         if ( addNewPicturesGear.current === "infiniteScroll" ) {
-            if ( hasMoreImages ) {
+            if ( hasMoreImages() ) {
                 target = document.querySelector("div.photo-card:last-child");
                 infinite.observe(target);
             }
@@ -148,7 +148,7 @@ function hasMoreImages() {
 
 function loadMoreImagesBtn() {
    
-    if (hasMoreImages()) {
+    if (hasMoreImages () ) {
         currentPageNum+=1      
     }
     else {
@@ -182,7 +182,7 @@ try {
     results = await axiosFetchPictures(currentUserQuery) 
         renderGalleryItems( refs.imgGallery, getGalleryItems(results) );
 
-    if ( hasMoreImages ) 
+    if ( hasMoreImages() ) 
     {
         target = document.querySelector("div.photo-card:last-child");
         observer.observe(target);
